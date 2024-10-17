@@ -12,9 +12,13 @@ def main():
             continue
 
         if date:
-            answer = input(f"Do you want to save the date {date}? (yes/y to confirm): ")
+            answer = input(f"Do you want to save the date {date}? (yes/y to confirm)(n): ")
             if answer.lower() in ["yes", "y"]:
                 times = get_times()
+                save_data(date, times)
+                break
+            elif answer.lower() == "n":
+                times = get_times(True)
                 save_data(date, times)
                 break
             else:
@@ -26,10 +30,13 @@ def main():
                     break
                 break
 
-def get_times():
+def get_times(bool = False):
     times_texts = {}
     while True:
-        time = input("Enter the time (HH:MM): ")
+        if bool == False:
+            time = input("Enter the time (HH:MM)(n): ")
+        else:
+            time = 'n'
 
         # Check if the time is in the correct format
         try:
@@ -56,12 +63,15 @@ def get_old_data_data(filename):
 
 def save_data(date, times):
     filename = str(date) + ".json"
-    old_data = get_old_data_data(filename)
+    old_data = get_old_data_data("logs/" + filename)
 
     if "times" in old_data:
         old_data["times"].update(times)
     else:
         old_data["times"] = times
+
+    # Sort the times dictionary by keys (time)
+    old_data["times"] = dict(sorted(old_data["times"].items()))
 
     with open(("logs/" + filename), "w") as file:
         json.dump(old_data, file, indent=4)
