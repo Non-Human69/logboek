@@ -1,6 +1,7 @@
 import json
 import os
 import datetime as dt
+import Home
 from collections import namedtuple
 
 def main():
@@ -12,7 +13,7 @@ def main():
             continue
 
         if date:
-            answer = input(f"Do you want to save the date {date}? (yes/y to confirm)(n): ")
+            answer = input(f"Do you want to save the date {date}? (yes/y to confirm)(n)(v): ")
             if answer.lower() in ["yes", "y"]:
                 times = get_times()
                 save_data(date, times)
@@ -20,6 +21,10 @@ def main():
             elif answer.lower() == "n":
                 times = get_times(True)
                 save_data(date, times)
+                break
+            elif answer.lower() == "v":
+                Home.main()
+                os.system("start " + "web_viewer.html")
                 break
             else:
                 answer = input(f"Do you want to save a other date? (yes/y to confirm): ")

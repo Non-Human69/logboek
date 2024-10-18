@@ -18,8 +18,9 @@ def get_data_logs_json():
             data = json.load(file)
             date = dt.datetime.strptime(log.split(".")[0], "%d-%m-%Y").date()
             days[str(date)] = data
-
+    print("Loaded data")
     return days
+
 
 # Show the data of a specific day, the time aligns to the left with that data in the right
 def show_day_data(date, days):
