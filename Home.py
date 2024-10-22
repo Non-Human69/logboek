@@ -13,7 +13,7 @@ class HTMLPageGen:
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Web Viewer</title>
+<title>Easy Viewer</title>
 </head>
         """
 
