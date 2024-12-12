@@ -13,7 +13,7 @@ def get_data_logs_json():
     logs = [log for log in logs if log.endswith(".json")]
 
     days = {}
-    for log in logs:
+    for log in sorted(logs, key=lambda x: (int(x.split("-")[1]), int(x.split("-")[0]))):
         with open("logs/" + log, "r") as file:
             data = json.load(file)
             date = dt.datetime.strptime(log.split(".")[0], "%d-%m-%Y").date()
